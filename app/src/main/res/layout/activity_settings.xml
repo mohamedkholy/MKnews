@@ -1,9 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings">
+    tools:context=".settings"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/Setting"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="30dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/country"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:text="@string/Country"
+        android:gravity="center_vertical"
+        android:drawablePadding="5dp"
+        android:paddingStart="5dp"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_baseline_map_24"
+
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/curr_coun"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:text="Egypt"
+        app:layout_constraintTop_toTopOf="@id/country"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/country"
+        android:paddingEnd="10dp"
+        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginTop="20dp"
+        />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:text="@string/Language"
+        android:gravity="center_vertical"
+        android:drawablePadding="5dp"
+        android:paddingStart="5dp"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_baseline_language_24"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/curr_lan"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+
+        app:layout_constraintTop_toTopOf="@id/language"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/language"
+        android:paddingEnd="10dp"
+        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+
+</LinearLayout>

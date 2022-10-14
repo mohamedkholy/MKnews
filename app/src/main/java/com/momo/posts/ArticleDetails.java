@@ -25,8 +25,8 @@ ActivityArticleDetailsBinding binding;
 
       binding.author.setText(a.author);
 
-      if(a.content!=null){
-        String s=a.content;
+      if(a.description!=null){
+        String s=a.description;
         String[] ss=s.split("\\[");
         binding.content.setText(ss[0]);
        }

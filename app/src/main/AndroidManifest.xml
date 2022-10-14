@@ -16,6 +16,15 @@
         android:theme="@style/Theme.Posts"
         tools:targetApi="31">
         <activity
+            android:name=".language"
+            android:exported="false" />
+        <activity
+            android:name=".country"
+            android:exported="false" />
+        <activity
+            android:name=".settings"
+            android:exported="false" />
+        <activity
             android:name=".ArticleDetails"
             android:exported="false" />
         <activity

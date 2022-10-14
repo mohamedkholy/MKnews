@@ -3,12 +3,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sports">
+    tools:context=".sports"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <androidx.recyclerview.widget.RecyclerView
+       <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/sports_recv"
-        />
+        android:layout_height="match_parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/sports_recv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#C4D8F0"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <LinearLayout
+            android:id="@+id/lin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            >
+
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/black"
+
+                />
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

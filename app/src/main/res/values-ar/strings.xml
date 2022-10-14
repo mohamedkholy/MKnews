@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MKnews</string>
+    <string name="HEADLINES">أهم العناوين</string>
+    <string name="SPORTS">رياضة</string>
+    <string name="BUSINESS">إقتصاد</string>
+    <string name="Setting">الإعدادات</string>
+    <string name="Country">الدولة</string>
+    <string name="Language">اللغة</string>
+    <string name="Search">البحث في المقالات</string>
+    <string name="Egypt">مصر</string>
+    <string name="United_Status">الولايات المتحدة الامريكية</string>
+    <string name="Turkey">تركيا</string>
+    <string name="France">فرنسا</string>
+    <string name="United_Arab_Emairates">الإمارات العربية المتحدة</string>
+    <string name="Ukraine">اوكرانيا</string>
+    <string name="United_Kingdom">المملكة المتحدة</string>
+    <string name="Arabic">العربية</string>
+    <string name="English">الأنجليزية</string>
+</resources>

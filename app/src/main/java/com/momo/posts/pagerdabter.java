@@ -1,5 +1,7 @@
 package com.momo.posts;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,12 +15,12 @@ public class pagerdabter extends FragmentStatePagerAdapter {
 
     ArrayList<mttab> l=new ArrayList<>();
 
-    public pagerdabter(@NonNull FragmentManager fm) {
+    public pagerdabter(@NonNull FragmentManager fm, Context c) {
         super(fm);
 
-        l.add(new mttab(new localnews(),"Headlines"));
-        l.add(new mttab(new sports(),"Sports"));
-        l.add(new mttab(new economy(),"Economy"));
+        l.add(new mttab(new localnews(),c.getString(R.string.HEADLINES)));
+        l.add(new mttab(new sports(),c.getString(R.string.SPORTS)));
+        l.add(new mttab(new economy(),c.getString(R.string.BUSINESS)));
     }
 
 

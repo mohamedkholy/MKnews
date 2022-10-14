@@ -1,11 +1,15 @@
 package com.momo.posts;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
@@ -26,9 +30,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class localnews extends Fragment {
-FragmentLocalnewsBinding binding;
-LocalNewsAdapter.onArticleclick onArticleclick;
-List<arical> l;
+    FragmentLocalnewsBinding binding;
+    LocalNewsAdapter.onArticleclick onArticleclick;
+    List<arical> l;
+    boolean loading = true;
+    int page=2;
+    int pages;
+    boolean mLoading = false;
+    LocalNewsAdapter adapter;
+    SharedPreferences spp;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -69,6 +79,7 @@ List<arical> l;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding=FragmentLocalnewsBinding.bind(view);
+        spp= getActivity().getSharedPreferences("coun", Context.MODE_PRIVATE);
 
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/")
@@ -77,16 +88,16 @@ List<arical> l;
 
         ApiInterface apiInterface=retrofit.create(ApiInterface.class);
 
-        Call<articalsparent> call=apiInterface.getArticalsLocalnews();
+        Call<articalsparent> call=apiInterface.getArticalsLocalnews(1,spp.getString("coun","US"));
 
 
 
         call.enqueue(new Callback<articalsparent>() {
             @Override
             public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
-
+                   pages=response.body().totalResults/10-1;
                 l=response.body().articles;
-                LocalNewsAdapter adapter=new LocalNewsAdapter(l,onArticleclick);
+                 adapter=new LocalNewsAdapter(l,onArticleclick);
                 binding.localnewsRecv.setAdapter(adapter);
                 binding.lin.setVisibility(View.GONE);
 
@@ -130,13 +141,13 @@ List<arical> l;
 
                 ApiInterface apiInterface=retrofit.create(ApiInterface.class);
 
-                Call<articalsparent> call=apiInterface.getArticalsLocalnews();
+                Call<articalsparent> call=apiInterface.getArticalsLocalnews(1,spp.getString("coun","US"));
                 call.enqueue(new Callback<articalsparent>() {
                     @Override
                     public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
                         binding.localnewsRecv.setVisibility(View.VISIBLE);
                         l=response.body().articles;
-                        LocalNewsAdapter adapter=new LocalNewsAdapter(l,onArticleclick);
+                         adapter=new LocalNewsAdapter(l,onArticleclick);
                         binding.localnewsRecv.setAdapter(adapter);
                         binding.refresh.setRefreshing(false);
 
@@ -144,7 +155,7 @@ List<arical> l;
 
                     @Override
                     public void onFailure(Call<articalsparent> call, Throwable t) {
-                        Log.d("gggggggggggg", "onResponsefaliure: "+    t.getLocalizedMessage());
+                        Toast.makeText(getContext(), "Connection Faild", Toast.LENGTH_SHORT).show();
                         binding.refresh.setRefreshing(false);
                     }
                 });
@@ -154,6 +165,47 @@ List<arical> l;
 
 
 
+
+
+
+        binding.localnewsRecv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+              if(!binding.localnewsRecv.canScrollVertically(1)){
+
+
+                  Retrofit retrofit=new Retrofit.Builder()
+                          .baseUrl("https://newsapi.org/")
+                          .addConverterFactory(GsonConverterFactory.create())
+                          .build();
+
+                  ApiInterface apiInterface=retrofit.create(ApiInterface.class);
+                  if(page<=pages){
+                  Call<articalsparent> call=apiInterface.getArticalsLocalnews(page,spp.getString("coun","US"));
+                  page++;
+                  call.enqueue(new Callback<articalsparent>() {
+                      @Override
+                      public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
+                          binding.localnewsRecv.setVisibility(View.VISIBLE);
+                          l.addAll(response.body().articles);
+                         adapter.notifyDataSetChanged();
+
+
+                      }
+
+                      @Override
+                      public void onFailure(Call<articalsparent> call, Throwable t) {
+                          Log.d("gggggggggggg", "onResponsefaliure: "+    t.getLocalizedMessage());
+
+                      }
+                  });
+
+                  }
+              }
+            }
+        });
 
 
 

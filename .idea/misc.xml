@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.3265" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/drawable/roundimage.xml" value="0.2675" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/drawable/search_background.xml" value="0.2975" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/layout/activity_country.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/layout/activity_language.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/layout/fragment_economy.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/layout/fragment_localnews.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/layout/fragment_sports.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mmmme/Documents/repos/news/MKnews/app/src/main/res/menu/main_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/mmmme/posts/app/src/main/res/drawable/article.xml" value="0.3465" />
         <entry key="..\:/Users/mmmme/posts/app/src/main/res/drawable/roundimage.xml" value="0.3465" />
         <entry key="..\:/Users/mmmme/posts/app/src/main/res/layout/activity_article_details.xml" value="0.17552083333333332" />

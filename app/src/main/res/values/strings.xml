@@ -1,14 +1,21 @@
 <resources>
     <string name="app_name">MKnews</string>
-    <string name="title_activity_home">home</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="HEADLINES">HEADLINES</string>
+    <string name="SPORTS">SPORTS</string>
+    <string name="BUSINESS">BUSINESS</string>
+    <string name="Setting">Setting</string>
+    <string name="Country">Country</string>
+    <string name="Language">Language</string>
+    <string name="Egypt">Egypt</string>
+    <string name="United_Status">United Status</string>
+    <string name="Turkey">Turkey</string>
+    <string name="France">France</string>
+    <string name="United_Arab_Emairates">United Arab Emirates</string>
+    <string name="Ukraine">Ukraine</string>
+    <string name="United_Kingdom">United Kingdom</string>
+    <string name="Search">Search aricles</string>
+    <string name="Arabic">Arabic</string>
+    <string name="English">English</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

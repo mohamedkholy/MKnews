@@ -39,7 +39,7 @@ public class LocalNewsAdapter extends RecyclerView.Adapter<LocalNewsAdapter.hold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull holder holder, int position) {
+    public  void  onBindViewHolder(@NonNull holder holder, int position) {
         if(l.get(position).urlToImage==null)
             holder.binding.image.setImageURI(null);
         else

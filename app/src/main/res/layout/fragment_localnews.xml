@@ -24,8 +24,10 @@
         android:id="@+id/localnews_recv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EADDDD"
+        android:background="#C4D8F0"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
 
     <LinearLayout
         android:id="@+id/lin"

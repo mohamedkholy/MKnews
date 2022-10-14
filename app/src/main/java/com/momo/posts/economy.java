@@ -1,11 +1,14 @@
 package com.momo.posts;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
@@ -26,14 +29,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class economy extends Fragment {
-FragmentEconomyBinding binding;
+    FragmentEconomyBinding binding;
     LocalNewsAdapter.onArticleclick onArticleclick;
     List<arical> l;
+    LocalNewsAdapter adapter;
+    int page=2;
+    int pages;
+    SharedPreferences spp;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -72,7 +78,7 @@ FragmentEconomyBinding binding;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding=FragmentEconomyBinding.bind(view);
-
+        spp= getActivity().getSharedPreferences("coun", Context.MODE_PRIVATE);
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -80,16 +86,16 @@ FragmentEconomyBinding binding;
 
         ApiInterface apiInterface=retrofit.create(ApiInterface.class);
 
-        Call<articalsparent> call=apiInterface.getArticalsbusiness();
+        Call<articalsparent> call=apiInterface.getArticalsbusiness(1,spp.getString("coun","US"));
 
 
 
         call.enqueue(new Callback<articalsparent>() {
             @Override
             public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
-
+                pages=response.body().totalResults/10-1;
                 l=response.body().articles;
-                LocalNewsAdapter adapter=new LocalNewsAdapter(l,onArticleclick);
+                 adapter=new LocalNewsAdapter(l,onArticleclick);
                 binding.economyRecv.setAdapter(adapter);
                 binding.lin.setVisibility(View.GONE);
 
@@ -133,13 +139,13 @@ FragmentEconomyBinding binding;
 
                 ApiInterface apiInterface=retrofit.create(ApiInterface.class);
 
-                Call<articalsparent> call=apiInterface.getArticalsbusiness();
+                Call<articalsparent> call=apiInterface.getArticalsbusiness(1,spp.getString("coun","US"));
                 call.enqueue(new Callback<articalsparent>() {
                     @Override
                     public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
                         binding.economyRecv.setVisibility(View.VISIBLE);
                         l=response.body().articles;
-                        LocalNewsAdapter adapter=new LocalNewsAdapter(l,onArticleclick);
+                         adapter=new LocalNewsAdapter(l,onArticleclick);
                         binding.economyRecv.setAdapter(adapter);
                         binding.refresh.setRefreshing(false);
 
@@ -147,7 +153,7 @@ FragmentEconomyBinding binding;
 
                     @Override
                     public void onFailure(Call<articalsparent> call, Throwable t) {
-                        Log.d("gggggggggggg", "onResponsefaliure: "+    t.getLocalizedMessage());
+                        Toast.makeText(getContext(), "Connection Faild", Toast.LENGTH_SHORT).show();
                         binding.refresh.setRefreshing(false);
                     }
                 });
@@ -155,6 +161,45 @@ FragmentEconomyBinding binding;
             }
         });
 
+
+        binding.economyRecv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(!binding.economyRecv.canScrollVertically(1)){
+
+
+                    Retrofit retrofit=new Retrofit.Builder()
+                            .baseUrl("https://newsapi.org/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+                    ApiInterface apiInterface=retrofit.create(ApiInterface.class);
+                    if(page<=pages){
+                        Call<articalsparent> call=apiInterface.getArticalsbusiness(page,spp.getString("coun","US"));
+                        page++;
+                        call.enqueue(new Callback<articalsparent>() {
+                            @Override
+                            public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
+                                binding.economyRecv.setVisibility(View.VISIBLE);
+                                l.addAll(response.body().articles);
+                                adapter.notifyDataSetChanged();
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<articalsparent> call, Throwable t) {
+                                Log.d("gggggggggggg", "onResponsefaliure: "+    t.getLocalizedMessage());
+
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
 
     }
 
