@@ -36,7 +36,7 @@ SharedPreferences.Editor editor;
             public void onClick(View view) {
                 editor.putString("lang","ar");
                 editor.commit();
-                triggerRebirth(language.this);
+                startActivity(new Intent(language.this,home.class));
 
             }
         });
@@ -45,19 +45,11 @@ SharedPreferences.Editor editor;
             public void onClick(View view) {
                 editor.putString("lang","en");
                 editor.commit();
-                triggerRebirth(language.this);
+                startActivity(new Intent(language.this,home.class));
             }
         });
 
 
-    }
-    public static void triggerRebirth(Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
-        ComponentName componentName = intent.getComponent();
-        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
-        context.startActivity(mainIntent);
-        Runtime.getRuntime().exit(0);
     }
 
 
