@@ -9,18 +9,18 @@ public interface ApiInterface {
 
 
 
-    @GET("v2/top-headlines?apiKey=cfd9620a95f6413da3ad3641a0c94ce2")
+    @GET("v2/top-headlines?apiKey=d9fa5782b1694b0ea467ce6e7e150c7d")
     public Call<articalsparent> getArticalsLocalnews(@Query("page") int page,@Query("country") String s);
 
-    @GET("v2/top-headlines?category=business&apiKey=cfd9620a95f6413da3ad3641a0c94ce2")
+    @GET("v2/top-headlines?category=business&apiKey=d9fa5782b1694b0ea467ce6e7e150c7d")
     public Call<articalsparent> getArticalsbusiness(@Query("page") int page,@Query("country") String s);
 
-    @GET("v2/top-headlines?category=sports&apiKey=cfd9620a95f6413da3ad3641a0c94ce2")
+    @GET("v2/top-headlines?category=sports&apiKey=d9fa5782b1694b0ea467ce6e7e150c7d")
     public Call<articalsparent> getArticalssport(@Query("page") int page,@Query("country") String s);
 
 
 
-    @GET("v2/everything?apiKey=cfd9620a95f6413da3ad3641a0c94ce2")
+    @GET("v2/everything?apiKey=d9fa5782b1694b0ea467ce6e7e150c7d")
     public Call<articalsparent> getArticalsSearch(@Query("q") String g);
 
 }

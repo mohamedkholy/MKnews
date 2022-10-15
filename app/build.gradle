@@ -6,12 +6,12 @@ android {
     compileSdk 32
 
     defaultConfig {
+        resConfigs("ar","en")
         applicationId "com.momo.posts"
         minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

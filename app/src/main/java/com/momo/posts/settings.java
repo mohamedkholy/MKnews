@@ -13,6 +13,7 @@ public class settings extends AppCompatActivity {
   ActivitySettingsBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MainActivity.setLocale(this,getSharedPreferences("coun",MODE_PRIVATE).getString("lang","en"));
         super.onCreate(savedInstanceState);
         binding=ActivitySettingsBinding.inflate(getLayoutInflater());
         View view=binding.getRoot();
@@ -38,4 +39,5 @@ public class settings extends AppCompatActivity {
         });
 
     }
+
 }

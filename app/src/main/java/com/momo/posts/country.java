@@ -16,10 +16,12 @@ SharedPreferences sp;
 SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MainActivity.setLocale(this,getSharedPreferences("coun",MODE_PRIVATE).getString("lang","en"));
         super.onCreate(savedInstanceState);
         binding=ActivityCountryBinding.inflate(getLayoutInflater());
         View view=binding.getRoot();
         setContentView(view);
+
         sp=getSharedPreferences("coun",MODE_PRIVATE);
         editor=sp.edit();
         Intent intent = new Intent(country.this, home.class);
@@ -118,4 +120,5 @@ SharedPreferences.Editor editor;
 
 
     }
+
 }
