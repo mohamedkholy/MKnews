@@ -1,14 +1,13 @@
 package com.momo.posts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class articalsparent {
     String status;
     int totalResults;
-    List<arical>  articles;
+    List<article>  articles;
 
-    public articalsparent(String status, int totalResults, List<arical> articles) {
+    public articalsparent(String status, int totalResults, List<article> articles) {
         this.status = status;
         this.totalResults = totalResults;
         this.articles = articles;
@@ -30,11 +29,11 @@ public class articalsparent {
         this.totalResults = totalResults;
     }
 
-    public List<arical> getArticles() {
+    public List<article> getArticles() {
         return articles;
     }
 
-    public void setArticles(List<arical> articles) {
+    public void setArticles(List<article> articles) {
         this.articles = articles;
     }
 }

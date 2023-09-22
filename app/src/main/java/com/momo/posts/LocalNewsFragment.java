@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.momo.posts.databinding.FragmentEconomyBinding;
+import com.momo.posts.databinding.FragmentLocalnewsBinding;
 
 import java.util.List;
 
@@ -27,29 +27,30 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
-public class economy extends Fragment {
-    FragmentEconomyBinding binding;
+public class localnews extends Fragment {
+    FragmentLocalnewsBinding binding;
     LocalNewsAdapter.onArticleclick onArticleclick;
-    List<arical> l;
-    LocalNewsAdapter adapter;
+    List<article> l;
+    boolean loading = true;
     int page=2;
     int pages;
+    boolean mLoading = false;
+    LocalNewsAdapter adapter;
     SharedPreferences spp;
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public economy() {
+    public localnews() {
 
     }
 
 
-    public static economy newInstance(String param1, String param2) {
-        economy fragment = new economy();
+    public static localnews newInstance(String param1, String param2) {
+        localnews fragment = new localnews();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,16 +70,15 @@ public class economy extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_economy, container, false);
+        return inflater.inflate(R.layout.fragment_localnews, container, false);
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding=FragmentEconomyBinding.bind(view);
+        binding=FragmentLocalnewsBinding.bind(view);
         spp= getActivity().getSharedPreferences("coun", Context.MODE_PRIVATE);
+
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl("https://newsapi.org/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -86,17 +86,17 @@ public class economy extends Fragment {
 
         ApiInterface apiInterface=retrofit.create(ApiInterface.class);
 
-        Call<articalsparent> call=apiInterface.getArticalsbusiness(1,spp.getString("coun","US"));
+        Call<articalsparent> call=apiInterface.getArticalsLocalnews(1,spp.getString("coun","US"));
 
 
 
         call.enqueue(new Callback<articalsparent>() {
             @Override
             public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
-                pages=response.body().totalResults/10-1;
+                   pages=response.body().totalResults/10-1;
                 l=response.body().articles;
                  adapter=new LocalNewsAdapter(l,onArticleclick);
-                binding.economyRecv.setAdapter(adapter);
+                binding.localnewsRecv.setAdapter(adapter);
                 binding.lin.setVisibility(View.GONE);
 
 
@@ -106,7 +106,7 @@ public class economy extends Fragment {
             public void onFailure(Call<articalsparent> call, Throwable t) {
                 binding.lin.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Connection Faild", Toast.LENGTH_SHORT).show();
-                binding.economyRecv.setVisibility(View.GONE);
+                binding.localnewsRecv.setVisibility(View.GONE);
 
 
             }
@@ -139,14 +139,14 @@ public class economy extends Fragment {
 
                 ApiInterface apiInterface=retrofit.create(ApiInterface.class);
 
-                Call<articalsparent> call=apiInterface.getArticalsbusiness(1,spp.getString("coun","US"));
+                Call<articalsparent> call=apiInterface.getArticalsLocalnews(1,spp.getString("coun","US"));
                 call.enqueue(new Callback<articalsparent>() {
                     @Override
                     public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
-                        binding.economyRecv.setVisibility(View.VISIBLE);
+                        binding.localnewsRecv.setVisibility(View.VISIBLE);
                         l=response.body().articles;
                          adapter=new LocalNewsAdapter(l,onArticleclick);
-                        binding.economyRecv.setAdapter(adapter);
+                        binding.localnewsRecv.setAdapter(adapter);
                         binding.refresh.setRefreshing(false);
 
                     }
@@ -162,46 +162,55 @@ public class economy extends Fragment {
         });
 
 
-        binding.economyRecv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
+
+
+        binding.localnewsRecv.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(!binding.economyRecv.canScrollVertically(1)){
+              if(!binding.localnewsRecv.canScrollVertically(1)){
 
 
-                    Retrofit retrofit=new Retrofit.Builder()
-                            .baseUrl("https://newsapi.org/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+                  Retrofit retrofit=new Retrofit.Builder()
+                          .baseUrl("https://newsapi.org/")
+                          .addConverterFactory(GsonConverterFactory.create())
+                          .build();
 
-                    ApiInterface apiInterface=retrofit.create(ApiInterface.class);
-                    if(page<=pages){
-                        Call<articalsparent> call=apiInterface.getArticalsbusiness(page,spp.getString("coun","US"));
-                        page++;
-                        call.enqueue(new Callback<articalsparent>() {
-                            @Override
-                            public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
-                                binding.economyRecv.setVisibility(View.VISIBLE);
-                                l.addAll(response.body().articles);
-                                adapter.notifyDataSetChanged();
+                  ApiInterface apiInterface=retrofit.create(ApiInterface.class);
+                  if(page<=pages){
+                  Call<articalsparent> call=apiInterface.getArticalsLocalnews(page,spp.getString("coun","US"));
+                  page++;
+                  call.enqueue(new Callback<articalsparent>() {
+                      @Override
+                      public void onResponse(Call<articalsparent> call, Response<articalsparent> response) {
+                          binding.localnewsRecv.setVisibility(View.VISIBLE);
+                          l.addAll(response.body().articles);
+                         adapter.notifyDataSetChanged();
 
 
-                            }
+                      }
 
-                            @Override
-                            public void onFailure(Call<articalsparent> call, Throwable t) {
-                                Log.d("gggggggggggg", "onResponsefaliure: "+    t.getLocalizedMessage());
+                      @Override
+                      public void onFailure(Call<articalsparent> call, Throwable t) {
+                          Log.d("gggggggggggg", "onResponsefaliure: "+    t.getLocalizedMessage());
 
-                            }
-                        });
+                      }
+                  });
 
-                    }
-                }
+                  }
+              }
             }
         });
 
+
+
+
+
     }
+
 
 
     @Override

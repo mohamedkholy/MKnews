@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.momo.posts.databinding.FragmentEconomyBinding;
 import com.momo.posts.databinding.FragmentSportsBinding;
 
 import java.util.List;
@@ -32,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class sports extends Fragment {
     FragmentSportsBinding binding;
     LocalNewsAdapter.onArticleclick onArticleclick;
-    List<arical> l;
+    List<article> l;
     LocalNewsAdapter adapter;
     int page=2;
     int pages;
